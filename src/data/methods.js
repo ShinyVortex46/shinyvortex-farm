@@ -1,8 +1,9 @@
 // Hunting methods available in the tracker.
+// To find which games support a given method, filter GAMES by
+// availableMethods.includes(method.id) — do not duplicate that logic here.
 // baseOdds: the base probability as a fraction string (display only).
 // usesCounter: whether encounter count is tracked for this method.
 // modifiers: modifier ids that can apply to this method.
-// games: game ids this method is available in, or ["all"].
 
 export const METHODS = [
   {
@@ -11,7 +12,6 @@ export const METHODS = [
     baseOdds: '1/4096',
     usesCounter: true,
     modifiers: ['shiny-charm'],
-    games: ['all'],
   },
   {
     id: 'masuda',
@@ -19,6 +19,5 @@ export const METHODS = [
     baseOdds: '1/683',
     usesCounter: true,
     modifiers: ['shiny-charm'],
-    games: ['gen4', 'gen5', 'gen6', 'gen7', 'gen8', 'gen9'],
   },
 ];
