@@ -8,6 +8,24 @@ import './NewHuntModal.css';
 
 const STEPS = ['Pokémon', 'Game', 'Method', 'Modifiers'];
 
+// Pokémon ID ranges for each generation's debut.
+// A Pokémon can only be hunted in games from its debut gen onward.
+const GEN_RANGES = [
+  { gen: 1, max: 151  },
+  { gen: 2, max: 251  },
+  { gen: 3, max: 386  },
+  { gen: 4, max: 493  },
+  { gen: 5, max: 649  },
+  { gen: 6, max: 721  },
+  { gen: 7, max: 809  },
+  { gen: 8, max: 905  },
+  { gen: 9, max: Infinity },
+];
+
+function getDebutGen(pokemonId) {
+  return GEN_RANGES.find(r => pokemonId <= r.max).gen;
+}
+
 // Converts a "1/N" odds string + active modifier extraRolls into a "1/X" string.
 // All shiny mechanics are modelled as extra rolls out of 4096.
 function computeOdds(method, activeModifiers) {
@@ -37,18 +55,28 @@ export default function NewHuntModal({ onClose, onStart }) {
   }, [search]);
 
   function selectPokemon(p) {
+    // Reset downstream selections if the new Pokémon has a different debut gen
+    if (!pokemon || getDebutGen(p.id) !== getDebutGen(pokemon.id)) {
+      setGameId('');
+      setMethodId('');
+      setModifiers([]);
+    }
     setPokemon(p);
     setSearch(p.name);
   }
 
   // ── Step 2: Game ──────────────────────────────────────────────────────────
+  const debutGen = pokemon ? getDebutGen(pokemon.id) : 1;
+
   const gamesByGen = useMemo(() => {
     const map = {};
     for (const g of GAMES) {
-      (map[g.generation] ??= []).push(g);
+      if (g.generation >= debutGen) {
+        (map[g.generation] ??= []).push(g);
+      }
     }
     return map;
-  }, []);
+  }, [debutGen]);
 
   const selectedGame = GAMES.find(g => g.id === gameId) ?? null;
 
