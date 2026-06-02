@@ -39,6 +39,16 @@
 
 .hcm-close:hover { color: #cdd6f4; background: #313244; }
 
+/* Game | Method banner */
+.hcm-game-banner {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #45475a;
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 1.8;
+}
+
 /* Header */
 .hcm-header {
   display: flex;
@@ -181,3 +191,61 @@
 
 .hcm-catch-btn:hover { opacity: 0.88; }
 .hcm-catch-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #c9a84c; }
+
+/* Cancel button */
+.hcm-cancel-btn {
+  background: none;
+  border: none;
+  color: #45475a;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+
+.hcm-cancel-btn:hover { color: #f38ba8; }
+
+/* Cancel confirmation screen */
+.hcm-confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.hcm-confirm-text {
+  font-size: 13px;
+  color: #a6adc8;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.hcm-confirm-yes {
+  width: 100%;
+  padding: 12px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  background: #f38ba8;
+  color: #1e1e2e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #c0607a;
+  transition: opacity 0.15s;
+}
+
+.hcm-confirm-yes:hover { opacity: 0.88; }
+
+.hcm-confirm-no {
+  background: none;
+  border: none;
+  color: #6c7086;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.hcm-confirm-no:hover { color: #cdd6f4; }

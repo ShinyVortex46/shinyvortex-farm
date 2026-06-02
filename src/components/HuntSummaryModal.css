@@ -1,0 +1,116 @@
+.hsm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.hsm-modal {
+  position: relative;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 16px;
+  width: 320px;
+  max-width: 95vw;
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.hsm-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #6c7086;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.hsm-close:hover { color: #cdd6f4; background: #313244; }
+
+/* Game | Method banner */
+.hsm-game-banner {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #45475a;
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* Header */
+.hsm-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hsm-sprite {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+}
+
+.hsm-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #f9e2af;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.hsm-caught-badge {
+  font-size: 11px;
+  color: #a6e3a1;
+  letter-spacing: 0.04em;
+}
+
+/* Stats row */
+.hsm-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  padding: 12px 0;
+  border-top: 1px solid #313244;
+  border-bottom: 1px solid #313244;
+}
+
+.hsm-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hsm-stat-label {
+  font-size: 9px;
+  color: #6c7086;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hsm-stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: #cdd6f4;
+}
+
+.hsm-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: #313244;
+}

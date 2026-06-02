@@ -97,3 +97,24 @@
   transform: translateY(2px);
   box-shadow: 0 2px 0 #9b1a24;
 }
+
+.clear-farm-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #45475a;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #313244;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  z-index: 10;
+}
+
+.clear-farm-btn:hover {
+  color: #f38ba8;
+  border-color: #f38ba8;
+}
