@@ -107,7 +107,7 @@ export default function NewHuntModal({ onClose, onStart }) {
   }
 
   function handleStart() {
-    onStart({ pokemon, gameId, methodId, modifiers });
+    onStart({ pokemon, gameId, methodId, modifiers, odds: currentOdds });
   }
 
   // ── Sprite preview (shown once a pokémon is chosen) ───────────────────────
@@ -123,12 +123,17 @@ export default function NewHuntModal({ onClose, onStart }) {
           <img src={getSpriteUrl(pokemon.id, true)} alt={`Shiny ${pokemon.name}`} />
           <span className="nhm-sprite-label nhm-sprite-label--shiny">✨ Shiny</span>
         </div>
-        {currentOdds && (
-          <div className="nhm-odds">
-            <span className="nhm-odds-label">Current Odds</span>
-            <span className="nhm-odds-value">{currentOdds}</span>
-          </div>
-        )}
+        <div className="nhm-sprite-divider" />
+        <div className="nhm-odds">
+          {currentOdds ? (
+            <>
+              <span className="nhm-odds-label">Current Odds</span>
+              <span className="nhm-odds-value">{currentOdds}</span>
+            </>
+          ) : (
+            <span className="nhm-odds-label nhm-odds-label--empty">odds after<br/>method pick</span>
+          )}
+        </div>
       </div>
     );
   }

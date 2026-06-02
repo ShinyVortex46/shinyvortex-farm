@@ -158,9 +158,9 @@
 
 /* Sprite preview */
 .nhm-sprite-preview {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto 1fr;
+  align-items: center;
   padding: 10px 0;
 }
 
@@ -185,15 +185,19 @@
 
 .nhm-sprite-label--shiny { color: #f9e2af; }
 
+.nhm-sprite-divider {
+  width: 1px;
+  height: 60px;
+  background: #45475a;
+  margin: 0 12px;
+}
+
 .nhm-odds {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 0 8px;
-  border-left: 1px solid #45475a;
-  margin-left: 8px;
 }
 
 .nhm-odds-label {
@@ -201,8 +205,11 @@
   color: #a6adc8;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  white-space: nowrap;
+  text-align: center;
+  line-height: 1.5;
 }
+
+.nhm-odds-label--empty { opacity: 0.45; }
 
 .nhm-odds-value {
   font-family: 'Press Start 2P', monospace;
