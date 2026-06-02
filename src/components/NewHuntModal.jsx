@@ -252,6 +252,13 @@ export default function NewHuntModal({ onClose, onStart }) {
                         checked={modifiers.includes(m.id)}
                         onChange={() => toggleModifier(m.id)}
                       />
+                      {m.id === 'shiny-charm' && (
+                        <img
+                          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/shiny-charm.png"
+                          alt="Shiny Charm"
+                          className="nhm-modifier-icon"
+                        />
+                      )}
                       {m.name}
                     </label>
                   ))}

@@ -243,6 +243,12 @@
   cursor: pointer;
 }
 
+.nhm-modifier-icon {
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
+}
+
 .nhm-empty {
   font-size: 13px;
   color: #6c7086;
