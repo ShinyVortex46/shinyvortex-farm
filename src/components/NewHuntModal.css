@@ -1,0 +1,289 @@
+.nhm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.nhm-modal {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 12px;
+  width: 480px;
+  max-width: 95vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+/* Header */
+.nhm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid #313244;
+}
+
+.nhm-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #cba6f7;
+  margin: 0;
+}
+
+.nhm-close {
+  background: none;
+  border: none;
+  color: #6c7086;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.nhm-close:hover { color: #cdd6f4; background: #313244; }
+
+/* Step indicator */
+.nhm-steps {
+  display: flex;
+  gap: 0;
+  padding: 12px 20px;
+  border-bottom: 1px solid #313244;
+}
+
+.nhm-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  opacity: 0.4;
+  font-size: 11px;
+}
+
+.nhm-step--active { opacity: 1; }
+.nhm-step--done   { opacity: 0.7; }
+
+.nhm-step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #313244;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.nhm-step--active .nhm-step-dot { background: #cba6f7; color: #1e1e2e; }
+.nhm-step--done .nhm-step-dot   { background: #a6e3a1; color: #1e1e2e; }
+
+.nhm-step-label { font-size: 10px; white-space: nowrap; }
+
+/* Body */
+.nhm-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.nhm-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nhm-label {
+  font-size: 11px;
+  color: #a6adc8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nhm-input,
+.nhm-select {
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 6px;
+  color: #cdd6f4;
+  padding: 10px 12px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+}
+
+.nhm-input:focus,
+.nhm-select:focus { border-color: #cba6f7; }
+
+/* Search results */
+.nhm-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.nhm-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.nhm-result:hover { background: #45475a; }
+
+.nhm-result-sprite {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.nhm-result-name {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+/* Sprite preview */
+.nhm-sprite-preview {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.nhm-sprite-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nhm-sprite-pair img {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+}
+
+.nhm-sprite-label {
+  font-size: 10px;
+  color: #a6adc8;
+  text-transform: uppercase;
+}
+
+.nhm-sprite-label--shiny { color: #f9e2af; }
+
+.nhm-odds {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-left: 1px solid #45475a;
+  margin-left: 8px;
+}
+
+.nhm-odds-label {
+  font-size: 9px;
+  color: #a6adc8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.nhm-odds-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #f9e2af;
+}
+
+/* Modifiers */
+.nhm-modifiers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nhm-modifier {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 12px;
+  background: #313244;
+  border-radius: 6px;
+  border: 1px solid #45475a;
+}
+
+.nhm-modifier input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: #cba6f7;
+  cursor: pointer;
+}
+
+.nhm-empty {
+  font-size: 13px;
+  color: #6c7086;
+  font-style: italic;
+}
+
+/* Footer */
+.nhm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-top: 1px solid #313244;
+}
+
+.nhm-footer-right { margin-left: auto; }
+
+.nhm-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.nhm-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.nhm-btn--primary {
+  background: #cba6f7;
+  color: #1e1e2e;
+  box-shadow: 0 3px 0 #9070c4;
+}
+
+.nhm-btn--primary:not(:disabled):hover { opacity: 0.88; }
+
+.nhm-btn--secondary {
+  background: #313244;
+  color: #cdd6f4;
+}
+
+.nhm-btn--secondary:hover { background: #45475a; }
+
+.nhm-btn--start {
+  background: #a6e3a1;
+  color: #1e1e2e;
+  box-shadow: 0 3px 0 #6db86a;
+}
+
+.nhm-btn--start:hover { opacity: 0.88; }

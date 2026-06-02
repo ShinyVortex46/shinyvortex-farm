@@ -1,12 +1,21 @@
+import { useState } from 'react';
 import './App.css';
 import farmBg from './assets/background-farm.png';
 import { getSpriteUrl, getCryUrl } from './utils/sprites';
+import NewHuntModal from './components/NewHuntModal';
 
 function playCry(id) {
   new Audio(getCryUrl(id)).play();
 }
 
 function App() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  function handleStart(huntData) {
+    console.log('New hunt:', huntData);
+    setModalOpen(false);
+  }
+
   return (
     <div className="farm" style={{ backgroundImage: `url(${farmBg})` }}>
       <div className="farm-overlay">
@@ -26,8 +35,17 @@ function App() {
           ))}
         </div>
 
-        <button className="hunt-button">Start a New Hunt</button>
+        <button className="hunt-button" onClick={() => setModalOpen(true)}>
+          Start a New Hunt
+        </button>
       </div>
+
+      {modalOpen && (
+        <NewHuntModal
+          onClose={() => setModalOpen(false)}
+          onStart={handleStart}
+        />
+      )}
     </div>
   );
 }
