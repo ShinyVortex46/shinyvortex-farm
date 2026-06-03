@@ -1,0 +1,226 @@
+.fv-root {
+  position: fixed;
+  inset: 0;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fv-back-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #cdd6f4;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #45475a;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.fv-back-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: #cba6f7;
+  color: #cba6f7;
+}
+
+.fv-status {
+  position: absolute;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #a6adc8;
+  text-align: center;
+}
+
+.fv-status--error { color: #f38ba8; }
+
+.fv-canvas-wrapper {
+  position: relative;
+  width: 960px;
+  height: 640px;
+  box-shadow: 0 0 0 3px #313244, 0 8px 48px rgba(0, 0, 0, 0.8);
+}
+
+.fv-canvas {
+  display: block;
+  width: 960px;
+  height: 640px;
+  image-rendering: pixelated;
+}
+
+/* Wrapper handles tile-aligned movement with a smooth CSS transition */
+/* width/height are set via inline style (dynamic sprite size) */
+.fv-sprite-wrap {
+  position: absolute;
+  cursor: pointer;
+  transition: left 0.25s ease, top 0.25s ease;
+  z-index: 1;
+}
+
+/* Scale up strongly on hover; pause the bounce so it doesn't fight the scale */
+.fv-sprite-wrap:hover {
+  z-index: 10;
+}
+
+.fv-sprite-wrap:hover .fv-sprite {
+  transform: scale(3);
+  animation-play-state: paused;
+}
+
+/* Sprite: bounce animation only — width/height set via inline style */
+.fv-sprite {
+  image-rendering: pixelated;
+  animation: fv-bounce 0.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.7));
+  transform-origin: center bottom;
+  transition: transform 0.1s;
+}
+
+@keyframes fv-bounce {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ── Options button ─────────────────────────────────────────────────────── */
+.fv-options-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  font-size: 18px;
+  line-height: 1;
+  color: #cdd6f4;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #45475a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.fv-options-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: #cba6f7;
+  color: #cba6f7;
+}
+
+/* ── Options panel overlay ───────────────────────────────────────────────── */
+.fv-options-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 60px 16px 0;
+}
+
+.fv-options-panel {
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 10px;
+  padding: 24px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+}
+
+.fv-options-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #cdd6f4;
+  letter-spacing: 0.05em;
+}
+
+.fv-options-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fv-options-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #a6adc8;
+}
+
+.fv-options-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fv-options-slider {
+  flex: 1;
+  accent-color: #cba6f7;
+  cursor: pointer;
+}
+
+.fv-options-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #f5c2e7;
+  min-width: 44px;
+  text-align: right;
+}
+
+.fv-options-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.fv-options-cancel,
+.fv-options-ok {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border: 1px solid;
+  transition: background 0.15s, color 0.15s;
+}
+
+.fv-options-cancel {
+  color: #a6adc8;
+  background: transparent;
+  border-color: #45475a;
+}
+
+.fv-options-cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cdd6f4;
+}
+
+.fv-options-ok {
+  color: #1e1e2e;
+  background: #cba6f7;
+  border-color: #cba6f7;
+}
+
+.fv-options-ok:hover {
+  background: #d4b8f8;
+  border-color: #d4b8f8;
+}
+
+.fv-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  pointer-events: none;
+  line-height: 2;
+}

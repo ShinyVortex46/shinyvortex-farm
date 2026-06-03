@@ -75,6 +75,31 @@
   to   { transform: translateY(-8px); }
 }
 
+.farm-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.farm-view-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #cdd6f4;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.farm-view-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: #a6e3a1;
+  color: #a6e3a1;
+}
+
 .hunt-button {
   font-family: 'Press Start 2P', monospace;
   font-size: 12px;

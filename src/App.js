@@ -4,7 +4,7 @@ import farmBg from './assets/background-farm.png';
 import { getSpriteUrl } from './utils/sprites';
 import NewHuntModal from './components/NewHuntModal';
 import HuntCounterModal from './components/HuntCounterModal';
-import HuntSummaryModal from './components/HuntSummaryModal';
+import FarmView from './components/FarmView';
 
 const GRID_SIZE = 12;
 
@@ -12,9 +12,9 @@ function App() {
   const [hunts, setHunts] = useState(
     () => JSON.parse(localStorage.getItem('hunts') || '[]')
   );
+  const [view,        setView]        = useState('hunts'); // 'hunts' | 'farm'
   const [newHuntOpen, setNewHuntOpen] = useState(false);
-  const [activeHunt, setActiveHunt] = useState(null);   // active → HuntCounterModal
-  const [summaryHunt, setSummaryHunt] = useState(null); // caught → HuntSummaryModal
+  const [activeHunt,  setActiveHunt]  = useState(null);
 
   useEffect(() => {
     localStorage.setItem('hunts', JSON.stringify(hunts));
@@ -56,16 +56,20 @@ function App() {
   function handleClearFarm() {
     setHunts([]);
     setActiveHunt(null);
-    setSummaryHunt(null);
   }
 
-  function handleSlotClick(hunt) {
-    if (hunt.status === 'active') setActiveHunt(hunt);
-    if (hunt.status === 'caught') setSummaryHunt(hunt);
-  }
+  const visibleHunts = hunts.filter(h => h.status === 'active');
+  const caughtHunts  = hunts.filter(h => h.status === 'caught');
+  const emptySlots   = Math.max(0, GRID_SIZE - visibleHunts.length);
 
-  const visibleHunts = hunts.filter(h => h.status === 'active' || h.status === 'caught');
-  const emptySlots = Math.max(0, GRID_SIZE - visibleHunts.length);
+  if (view === 'farm') {
+    return (
+      <FarmView
+        caughtHunts={caughtHunts}
+        onBack={() => setView('hunts')}
+      />
+    );
+  }
 
   return (
     <div className="farm" style={{ backgroundImage: `url(${farmBg})` }}>
@@ -81,13 +85,13 @@ function App() {
             <div
               key={hunt.id}
               className="pokemon-slot pokemon-slot--filled"
-              onClick={() => handleSlotClick(hunt)}
+              onClick={() => setActiveHunt(hunt)}
             >
               <img
                 src={getSpriteUrl(hunt.pokemon.id, true)}
                 alt={hunt.pokemon.name}
                 className="pokemon-sprite"
-                style={{ opacity: hunt.status === 'caught' ? 1 : 0.35 }}
+                style={{ opacity: 0.35 }}
               />
             </div>
           ))}
@@ -96,9 +100,14 @@ function App() {
           ))}
         </div>
 
-        <button className="hunt-button" onClick={() => setNewHuntOpen(true)}>
-          Start a New Hunt
-        </button>
+        <div className="farm-actions">
+          <button className="hunt-button" onClick={() => setNewHuntOpen(true)}>
+            Start a New Hunt
+          </button>
+          <button className="farm-view-btn" onClick={() => setView('farm')}>
+            🌿 Go to Farm
+          </button>
+        </div>
       </div>
 
       {newHuntOpen && (
@@ -118,12 +127,6 @@ function App() {
         />
       )}
 
-      {summaryHunt && (
-        <HuntSummaryModal
-          hunt={summaryHunt}
-          onClose={() => setSummaryHunt(null)}
-        />
-      )}
     </div>
   );
 }
