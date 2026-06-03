@@ -26,15 +26,18 @@ function getDebutGen(pokemonId) {
   return GEN_RANGES.find(r => pokemonId <= r.max).gen;
 }
 
-// Converts a "1/N" odds string + active modifier extraRolls into a "1/X" string.
-// All shiny mechanics are modelled as extra rolls out of 4096.
-function computeOdds(method, activeModifiers) {
-  if (!method) return null;
-  const denom = parseInt(method.baseOdds.split('/')[1], 10);
-  const baseRolls = Math.round(4096 / denom);
+// Converts generation-aware baseOdds + active modifier extraRolls into a "1/X" string.
+// Pre-gen6 uses an 8192-roll universe; gen6+ uses 4096.
+function computeOdds(method, activeModifiers, gameGeneration) {
+  if (!method || !gameGeneration) return null;
+  const isPreGen6 = gameGeneration <= 5;
+  const universe  = isPreGen6 ? 8192 : 4096;
+  const oddsKey   = isPreGen6 ? 'pre6' : 'gen6plus';
+  const oddsStr   = method.baseOdds[oddsKey];
+  const denom     = parseInt(oddsStr.split('/')[1], 10);
+  const baseRolls = Math.round(universe / denom);
   const extraRolls = activeModifiers.reduce((sum, mod) => sum + mod.extraRolls, 0);
-  const totalRolls = baseRolls + extraRolls;
-  return `1/${Math.round(4096 / totalRolls)}`;
+  return `1/${Math.round(universe / (baseRolls + extraRolls))}`;
 }
 
 export default function NewHuntModal({ onClose, onStart }) {
@@ -91,9 +94,11 @@ export default function NewHuntModal({ onClose, onStart }) {
   // ── Step 4: Modifiers ─────────────────────────────────────────────────────
   const availableModifiers = useMemo(() => {
     if (!selectedGame) return [];
-    return MODIFIERS.filter(
-      m => m.games.includes('all') || m.games.includes(selectedGame.methodGroup)
-    );
+    return MODIFIERS.filter(m => {
+      // Shiny charm only applies from gen 6 onward
+      if (m.id === 'shiny-charm' && selectedGame.generation <= 5) return false;
+      return m.games.includes('all') || m.games.includes(selectedGame.methodGroup);
+    });
   }, [selectedGame]);
 
   const activeModifiers = useMemo(
@@ -102,8 +107,8 @@ export default function NewHuntModal({ onClose, onStart }) {
   );
 
   const currentOdds = useMemo(
-    () => computeOdds(selectedMethod, activeModifiers),
-    [selectedMethod, activeModifiers]
+    () => computeOdds(selectedMethod, activeModifiers, selectedGame?.generation),
+    [selectedMethod, activeModifiers, selectedGame]
   );
 
   function toggleModifier(id) {
